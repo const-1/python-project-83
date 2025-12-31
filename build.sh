@@ -6,7 +6,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 set -e
 
 # Activate uv
-source $HOME/.local/bin/env
+.$HOME/.local/bin/env
 
 # Install project dependencies using Makefile
 make install
