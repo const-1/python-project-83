@@ -1,12 +1,7 @@
-# !/usr/bin/env bash
-# Download and install the uv utility for dependency management
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Stop script on error
+#!/bin/sh
 set -e
+echo "Installing dependencies."
+pip install -r requirements.txt
+echo "Ready!"
+EOF
 
-# Activate uv
-.$HOME/.local/bin/env
-
-# Install project dependencies using Makefile
-make install
