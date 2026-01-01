@@ -9,7 +9,8 @@ load_dotenv()
 app = Flask(__name__)
 
 # Get secret key from environment variable (important for security!)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-fallback-key')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+ # 'default-fallback-key'
 
 # Create first route (handler) for home page
 @app.route('/')
