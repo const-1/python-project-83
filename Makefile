@@ -17,5 +17,4 @@ build:
 
 # Command for running on Render.com (dependencies are already installed globally)
 render-start:
-	    gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
-
+	.venv/bin/python -m gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
