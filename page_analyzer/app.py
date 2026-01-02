@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from dotenv import load_dotenv
 
 # Load environment variables from the .env file
@@ -15,4 +15,4 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 # Create first route (handler) for home page
 @app.route('/')
 def index():
-    return 'Hello, World! This is Page Analyzer.'
+    return render_template('index.html')
