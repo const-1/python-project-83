@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-5 mb-3">Sites</h1>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover" data-test="urls">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Last Check</th>
+                <th>Status Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url in urls %}
+            <tr>
+                <td>{{ url[0] }}</td>
+                <td>
+                    <a href="{{ url_for('url_detail', id=url[0]) }}">
+                        {{ url[1] }}
+                    </a>
+                </td>
+                <td>{{ url[2].strftime('%Y-%m-%d') if url[2] else '' }}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

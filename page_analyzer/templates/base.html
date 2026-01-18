@@ -1,28 +1,38 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en" class="h-100">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Анализатор страниц{% endblock %}</title>
-    <!-- Bootstrap 5 CSS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Analyzer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <!-- Навигация -->
+<body class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">Анализатор страниц</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Page Analyzer</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="{{ url_for('urls') }}">Sites</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Основной контент -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <main class="flex-grow-1">
         <div class="container-lg mt-3">
             {% block content %}{% endblock %}
         </div>
     </main>
 
-    <!-- Футер -->
     <footer class="border-top py-3 mt-5">
         <div class="container-lg">
             <div class="text-center">
@@ -31,7 +41,7 @@
         </div>
     </footer>
 
-    <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
