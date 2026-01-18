@@ -2,14 +2,8 @@
 set -e
 echo "Installing dependencies..."
 
-if ! command -v uv &> /dev/null; then
-    echo "Installing uv..."
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-fi
+pip install -e .
 
-source $HOME/.local/bin/env 2>/dev/null || true
-
-uv sync --quiet
 echo "Dependencies installed!"
 
 if [ -n "$DATABASE_URL" ]; then
@@ -23,4 +17,3 @@ if [ -n "$DATABASE_URL" ]; then
 else
     echo "DATABASE_URL not set. Skipping database setup."
 fi
-
