@@ -21,12 +21,13 @@
                         {{ url[1] }}
                     </a>
                 </td>
+                <!-- Last check date -->
                 <td>{{ url[2].strftime('%Y-%m-%d') if url[2] else '' }}</td>
-                <td></td>
+                <!-- Last check status code -->
+                <td>{{ url[3] if url[3] is not none else '' }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
 {% endblock %}
-
