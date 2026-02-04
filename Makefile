@@ -1,20 +1,43 @@
-# Install dependencies using uv (modern alternative to pip)
+# Install dependencies using uv
 install:
 	uv sync
 
-# Run in development mode with automatic reloading
+# Development server with auto-reload
 dev:
 	uv run flask --debug --app page_analyzer:app run
 
-# Start production server locally with Gunicorn
+# Production server locally
 PORT ?= 8000
 start:
 	uv run gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
 
-# Command for building on Render.com
+# Build for Render
 build:
 	./build.sh
 
-# Command for running on Render.com (dependencies are already installed globally)
+# Run on Render
 render-start:
 	.venv/bin/python -m gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
+
+# === Code Quality Commands ===
+# Lint code
+lint:
+	uv run ruff check .
+
+# Auto-fix lint errors
+lint-fix:
+	uv run ruff check --fix .
+
+# Format code
+format:
+	uv run ruff format .
+
+# Combined: lint and format
+quality:
+	uv run ruff check . && uv run ruff format .
+
+# Clean up Python cache files
+clean:
+	find . -type f -name "*.pyc" -delete
+	find . -type d -name "__pycache__" -delete
+	find . -type d -name ".pytest_cache" -exec rm -rf {} + 2>/dev/null || true

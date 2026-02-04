@@ -5,10 +5,7 @@ def add_url(name):
     """Add new URL to database"""
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute(
-        "INSERT INTO urls (name) VALUES (%s) RETURNING id",
-        (name,)
-    )
+    cur.execute("INSERT INTO urls (name) VALUES (%s) RETURNING id", (name,))
     url_id = cur.fetchone()[0]
     conn.commit()
     cur.close()
@@ -64,6 +61,7 @@ def get_url_by_id(id):
     conn.close()
     return url
 
+
 def add_url_check(url_id, status_code=None, h1=None, title=None, description=None):
     """Add URL check to database with SEO data"""
     conn = get_connection()
@@ -73,13 +71,12 @@ def add_url_check(url_id, status_code=None, h1=None, title=None, description=Non
         cur.execute(
             "INSERT INTO url_checks (url_id, status_code, h1, title, description) "
             "VALUES (%s, %s, %s, %s, %s) RETURNING id",
-            (url_id, status_code, h1, title, description)
+            (url_id, status_code, h1, title, description),
         )
     else:
         # This case probably won't be used now, but keep for compatibility
         cur.execute(
-            "INSERT INTO url_checks (url_id) VALUES (%s) RETURNING id",
-            (url_id,)
+            "INSERT INTO url_checks (url_id) VALUES (%s) RETURNING id", (url_id,)
         )
 
     check_id = cur.fetchone()[0]
@@ -93,11 +90,14 @@ def get_url_checks(url_id):
     """Get all checks for specific URL"""
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("""
+    cur.execute(
+        """
         SELECT * FROM url_checks
         WHERE url_id = %s
         ORDER BY created_at DESC
-    """, (url_id,))
+    """,
+        (url_id,),
+    )
     checks = cur.fetchall()
     cur.close()
     conn.close()

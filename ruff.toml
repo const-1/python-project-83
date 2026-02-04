@@ -1,0 +1,16 @@
+# ruff.toml
+
+line-length = 88
+target-version = "py312"
+
+[lint]
+select = ["E", "W", "F", "I"]
+ignore = ["E501", "F401", "E722", "W292", "W293"]
+
+[lint.isort]
+known-first-party = ["page_analyzer"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+
