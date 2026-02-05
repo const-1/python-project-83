@@ -4,7 +4,7 @@ install:
 
 # Setup for project (used in CI/CD)
 setup:
-	uv sync --only-binary :all:
+	uv sync
 	
 # Development server with auto-reload
 dev:
