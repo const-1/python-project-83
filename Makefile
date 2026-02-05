@@ -4,8 +4,8 @@ install:
 
 # Setup for project (used in CI/CD)
 setup:
-	uv sync
-
+	uv sync --only-binary :all:
+	
 # Development server with auto-reload
 dev:
 	uv run flask --debug --app page_analyzer:app run
