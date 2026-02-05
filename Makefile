@@ -2,6 +2,10 @@
 install:
 	uv sync
 
+# Setup for project (used in CI/CD)
+setup:
+	uv sync
+
 # Development server with auto-reload
 dev:
 	uv run flask --debug --app page_analyzer:app run
