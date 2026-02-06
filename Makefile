@@ -5,6 +5,12 @@ install:
 # Setup for project (used in CI/CD)
 setup:
 	uv sync
+	@echo "Initializing database..."
+	uv run python init_db.py || echo "Database initialization completed or skipped"
+
+# Initialize database separately
+init-db:
+	uv run python init_db.py
 	
 # Development server with auto-reload
 dev:
