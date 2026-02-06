@@ -1,4 +1,5 @@
 import os
+from urllib.parse import urlparse
 
 import psycopg2
 from dotenv import load_dotenv
@@ -16,5 +17,14 @@ def get_connection():
     else:
         db_url = DATABASE_URL
 
-    # Connect with SSL for Render
-    return psycopg2.connect(db_url, sslmode="require")
+    # Configure SSL for the database connection
+    # SSL is disabled in CI/CD (test env)
+    # SSL is enabled in production (Render)
+    # "onrender.com" in DATABASE_URL means we are in production
+
+    if "onrender.com" in (db_url or ""):
+        # Production requires SSL
+        return psycopg2.connect(db_url, sslmode="require")
+    else:
+        # Dev/test does not require SSL
+        return psycopg2.connect(db_url)
