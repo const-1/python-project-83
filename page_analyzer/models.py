@@ -14,7 +14,9 @@ def add_url(name):
     normalized_name = normalize_url(name)
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO urls (name) VALUES (%s) RETURNING id", (normalized_name,))
+    cur.execute(
+        "INSERT INTO urls (name) VALUES (%s) RETURNING id", (normalized_name,)
+    )
     url_id = cur.fetchone()[0]
     conn.commit()
     cur.close()
@@ -72,7 +74,9 @@ def get_url_by_id(id):
     return url
 
 
-def add_url_check(url_id, status_code=None, h1=None, title=None, description=None):
+def add_url_check(
+    url_id, status_code=None, h1=None, title=None, description=None
+):
     """Add URL check to database with SEO data"""
     conn = get_connection()
     cur = conn.cursor()
@@ -87,7 +91,8 @@ def add_url_check(url_id, status_code=None, h1=None, title=None, description=Non
     else:
         # This case probably won't be used now, but keep for compatibility
         cur.execute(
-            "INSERT INTO url_checks (url_id) VALUES (%s) RETURNING id", (url_id,)
+            "INSERT INTO url_checks (url_id) VALUES (%s) RETURNING id",
+            (url_id,),
         )
 
     check_id = cur.fetchone()[0]
