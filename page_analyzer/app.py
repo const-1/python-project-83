@@ -74,7 +74,9 @@ def check_url(id):
     try:
         # Make HTTP request with timeout and User-Agent
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            )
         }
         response = requests.get(
             site_url, headers=headers, timeout=10, allow_redirects=True
@@ -93,12 +95,13 @@ def check_url(id):
             # Extract h1
             h1_tag = soup.find("h1")
             if h1_tag:
-                h1 = h1_tag.get_text().strip()[:255]  # Limit to 255 chars for DB
+                # Limit to 255 chars for DB
+                h1 = h1_tag.get_text().strip()[:255]
 
             # Extract title
             title_tag = soup.find("title")
             if title_tag:
-                title = title_tag.get_text().strip()[:255]  # Limit to 255 chars
+                title = title_tag.get_text().strip()[:255]
 
             # Extract description
             meta_desc = soup.find("meta", attrs={"name": "description"})

@@ -79,7 +79,8 @@ def add_url_check(url_id, status_code=None, h1=None, title=None, description=Non
 
     if status_code is not None:
         cur.execute(
-            "INSERT INTO url_checks (url_id, status_code, h1, title, description) "
+            "INSERT INTO url_checks "
+            "(url_id, status_code, h1, title, description) "
             "VALUES (%s, %s, %s, %s, %s) RETURNING id",
             (url_id, status_code, h1, title, description),
         )
