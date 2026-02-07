@@ -1,4 +1,5 @@
 from urllib.parse import urlparse
+
 from page_analyzer.database import get_connection
 
 

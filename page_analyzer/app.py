@@ -8,7 +8,6 @@ from requests.exceptions import RequestException
 
 from page_analyzer import models
 
-
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
@@ -37,7 +36,7 @@ def add_url():
 
     # Normalize URL
     normalized_url = models.normalize_url(url)
-    
+
     # Check if URL already exists
     existing_url = models.find_url_by_name(normalized_url)
     if existing_url:
