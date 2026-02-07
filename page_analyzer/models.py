@@ -1,11 +1,19 @@
 from page_analyzer.database import get_connection
 
 
+def normalize_url(url):
+    """Remove trailing slash from URL for consistent storage"""
+    if url.endswith('/'):
+        return url.rstrip('/')
+    return url
+
+
 def add_url(name):
     """Add new URL to database"""
+    normalized_name = normalize_url(name)
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO urls (name) VALUES (%s) RETURNING id", (name,))
+    cur.execute("INSERT INTO urls (name) VALUES (%s) RETURNING id", (normalized_name,))
     url_id = cur.fetchone()[0]
     conn.commit()
     cur.close()
@@ -42,9 +50,10 @@ def get_all_urls():
 
 def find_url_by_name(name):
     """Find URL by name"""
+    normalized_name = normalize_url(name)
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM urls WHERE name = %s", (name,))
+    cur.execute("SELECT * FROM urls WHERE name = %s", (normalized_name,))
     url = cur.fetchone()
     cur.close()
     conn.close()
