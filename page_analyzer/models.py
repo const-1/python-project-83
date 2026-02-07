@@ -3,8 +3,8 @@ from page_analyzer.database import get_connection
 
 def normalize_url(url):
     """Remove trailing slash from URL for consistent storage"""
-    if url.endswith('/'):
-        return url.rstrip('/')
+    if url.endswith("/"):
+        return url.rstrip("/")
     return url
 
 

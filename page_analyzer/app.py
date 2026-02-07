@@ -14,8 +14,8 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 def normalize_url(url):
     """Normalize URL by removing trailing slash"""
-    if url.endswith('/'):
-        return url.rstrip('/')
+    if url.endswith("/"):
+        return url.rstrip("/")
     return url
 
 
@@ -43,7 +43,7 @@ def add_url():
 
     # Normalize URL
     normalized_url = normalize_url(url)
-    
+
     # Check if URL already exists
     existing_url = models.find_url_by_name(normalized_url)
     if existing_url:
