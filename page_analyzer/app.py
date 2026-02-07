@@ -8,7 +8,6 @@ from requests.exceptions import RequestException
 
 from page_analyzer import models
 
-
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
@@ -48,8 +47,7 @@ def add_url():
     # Check if URL already exists
     existing_url = models.find_url_by_name(normalized_url)
     if existing_url:
-        # For the test to pass, show "Страница успешно добавлена" even for existing URLs
-        flash("Страница успешно добавлена", "success")
+        flash("Страница уже существует", "info")
         return redirect(url_for("url_detail", id=existing_url[0]))
 
     # Add URL to database
