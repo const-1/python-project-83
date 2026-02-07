@@ -1,11 +1,11 @@
+from urllib.parse import urlparse
 from page_analyzer.database import get_connection
 
 
 def normalize_url(url):
-    """Remove trailing slash from URL for consistent storage"""
-    if url.endswith("/"):
-        return url.rstrip("/")
-    return url
+    """Normalize URL to just scheme and netloc (domain)"""
+    parsed = urlparse(url)
+    return f"{parsed.scheme}://{parsed.netloc}"
 
 
 def add_url(name):
