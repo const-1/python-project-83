@@ -1,4 +1,4 @@
-name: SonarCloud Static Analysis
+name: SonarCloud Python Analysis
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: SonarCloud Scan (Static Analysis Only)
+      - name: SonarCloud Python Static Analysis
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,5 +23,5 @@ jobs:
             -Dsonar.projectKey=const-1_python-project-83
             -Dsonar.organization=const-1
             -Dsonar.sources=page_analyzer
-            -Dsonar.exclusions=**/__pycache__/**,**/.github/**,**/tests/**,**/.venv/**
-            -Dsonar.python.analysis.mode=preview 
+            -Dsonar.language=py
+            -Dsonar.exclusions=**/__pycache__/**,**/.github/**,**/tests/**,**/.venv/**,**/*.sql,Makefile,build.sh
