@@ -9,6 +9,7 @@
 ### Hexlet tests and linter status:
 
 [![Actions Status](https://github.com/const-1/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/const-1/python-project-83/actions)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=const-1_python-project-83&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=const-1_python-project-83)
 
 A professional web application for website monitoring and SEO analysis. Page Analyzer allows you to check website availability, extract SEO metadata, and track website status changes over time.
 
