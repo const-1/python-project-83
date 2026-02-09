@@ -1,0 +1,27 @@
+name: SonarCloud Static Analysis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: SonarCloud Scan (Static Analysis Only)
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.projectKey=const-1_python-project-83
+            -Dsonar.organization=const-1
+            -Dsonar.sources=page_analyzer
+            -Dsonar.exclusions=**/__pycache__/**,**/.github/**,**/tests/**,**/.venv/**
+            -Dsonar.python.analysis.mode=preview 
