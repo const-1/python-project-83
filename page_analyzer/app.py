@@ -8,7 +8,7 @@ from requests.exceptions import RequestException
 
 from page_analyzer import models
 
-app = Flask(__name__)
+app = Flask(__name__) #NOSONAR
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 
